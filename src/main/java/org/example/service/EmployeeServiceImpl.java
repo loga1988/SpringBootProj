@@ -4,10 +4,12 @@ import org.example.entity.Employee;
 import org.example.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
 @Service
+@Validated
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
@@ -17,7 +19,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee saveEmployee(Employee emp) {
+    public Employee saveEmployee(@Validated(Employee.class) Employee emp) {
         return employeeRepository.save(emp);
     }
 
