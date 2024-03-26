@@ -78,3 +78,21 @@ Ex: student, courses
 @Valid -- this annotation is used to validate the nested object inside a parent object and also it can be specifically used inside the controller @Validated -- allow you to group and validate constraints selectively based on specific use cases Ex for validated : when creating a user we have to validate username, password and email but when updating a user we have to allow only email and password update
 
 @Pattern -- it sill match a specific pattern for the input string parameter Ex: @Pattern(regexp ="\d{13}", message="ISBN string should be a 13 digit number") @NotEmpty @NotNull @Size-- To valid the list of elements
+
+Cache in Spring boot 
+1) In-memory Caching -- this provides querying capacity on top of caching 
+2) Web server caching -- stores data, such as a copy of a web page served by a web server
+3) Database caching -- this helps to avoid querying database frequently 
+4) CDN (Content Delivery Network) caching -- group of distributed servers that speed up the delivery of web content
+
+@Cacheable -- method level annotation to cache the return object of method
+@CacheEvict -- when we don't want to populate the values that we don't need often 
+@CachePut -- to update the content of cache without method execution
+@Caching -- if we want to use multiple cacheEvict then we can go for Caching 
+
+kafka                                       JMS
+pull type                                   push type
+high throughput                             low throughput
+more scalable and high availability         less scalable and moderate availability
+
+***throughput -- number of messages kafka processes in a specific period of time 
