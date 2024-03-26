@@ -96,3 +96,89 @@ high throughput                             low throughput
 more scalable and high availability         less scalable and moderate availability
 
 ***throughput -- number of messages kafka processes in a specific period of time 
+
+Create @Configuration class for each data source mentioned in application.properties 
+we can mention the repository base packages using annotation @EnableJPARepositories and basepackage attribute
+
+#first db
+spring.datasource.url = [url]
+spring.datasource.username = [username]
+spring.datasource.password = [password]
+spring.datasource.driverClassName = oracle.jdbc.OracleDriver
+
+#second db ...
+spring.secondDatasource.url = [url]
+spring.secondDatasource.username = [username]
+spring.secondDatasource.password = [password]
+spring.secondDatasource.driverClassName = oracle.jdbc.OracleDriver
+
+spring.h2.console.enabled=true
+spring.jpa.generate-ddl=true
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.show_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
+
+
+
+Add in any class annotated with @Configuration the following methods:
+
+@Bean
+@Primary
+@ConfigurationProperties(prefix="spring.datasource")
+public DataSource primaryDataSource() {
+    return DataSourceBuilder.create().build();
+}
+
+@Bean
+@ConfigurationProperties(prefix="spring.secondDatasource")
+public DataSource secondaryDataSource() {
+    return DataSourceBuilder.create().build();
+}
+
+
+multiple datssource example
+
+@Configuration
+@EnableTransactionManagement
+@EnableJpaRepositories(
+        entityManagerFactoryRef = "userEntityManagerFactory",
+        transactionManagerRef = "userTransactionManager",
+        basePackages = { "com.example.repositories.user" })
+public class UserDatasourceConfiguration {
+
+    @Primary
+    @Bean(name="userProperties")
+    @ConfigurationProperties("spring.datasource")
+    public DataSourceProperties dataSourceProperties() {
+
+        return new DataSourceProperties();
+    }
+
+    @Primary
+    @Bean(name="userDatasource")
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource datasource(@Qualifier("userProperties") DataSourceProperties properties){
+
+        return properties.initializeDataSourceBuilder().build();
+    }
+
+    @Primary
+    @Bean(name="userEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean
+            (EntityManagerFactoryBuilder builder,
+             @Qualifier("userDatasource") DataSource dataSource){
+
+        return builder.dataSource(dataSource)
+                .packages("com.example.model.user")
+                .persistenceUnit("users").build();
+    }
+
+    @Primary
+    @Bean(name = "userTransactionManager")
+    @ConfigurationProperties("spring.jpa")
+    public PlatformTransactionManager transactionManager(
+            @Qualifier("userEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+
+        return new JpaTransactionManager(entityManagerFactory);
+    }
+}
