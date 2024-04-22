@@ -131,6 +131,15 @@ Spring Boot with JMS
 
   JMS session object is a single threaded it can't be shared across multiple threads so not thread safe
 
+  **Kafka messaging**
+  how kafka differs from other messaging -- fault tolerance, high throughput, and scalability, unlike traditional messaging systems
+  SSL for encryption, SASL for authentication, and ACLs for authorization.
+  Instead JMSListener we use kafkaListener
+  fault tolerance -- kafka replicates data across multiple brokers
+  Securing messages in kafka 
+  spring.kafka.properties.security.protocol: SSL
+  dead-letter queue 
+
 ***throughput -- number of messages kafka processes in a specific period of time 
 
 Create @Configuration class for each data source mentioned in application.properties 
