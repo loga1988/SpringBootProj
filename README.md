@@ -100,6 +100,12 @@ pull type                                   push type
 high throughput                             low throughput
 more scalable and high availability         less scalable and moderate availability
 
+Spring Boot with JMS
+
+!) add activemq configurations in the application.properties
+2) create a JMS producer and JMS consumer by implementing JMSListener interface 
+3) then do jmsProducer.sendMessage("Hello, World!");
+
 ***throughput -- number of messages kafka processes in a specific period of time 
 
 Create @Configuration class for each data source mentioned in application.properties 
