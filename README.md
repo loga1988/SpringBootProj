@@ -75,6 +75,11 @@ ManytoMany mapping multiple instances of one entity is linked with multiple inst
 
 Ex: student, courses
 
+Circular Dependency can be avoided by using constructor based injection and lazy loading 
+
+Setter Based Injection -- IoC Container first creates the dependent object then the Target Class Object
+Constructor Based Injection -- IOC container first created the target object and then the dependent object
+
 @Valid -- this annotation is used to validate the nested object inside a parent object and also it can be specifically used inside the controller @Validated -- allow you to group and validate constraints selectively based on specific use cases Ex for validated : when creating a user we have to validate username, password and email but when updating a user we have to allow only email and password update
 
 @Pattern -- it sill match a specific pattern for the input string parameter Ex: @Pattern(regexp ="\d{13}", message="ISBN string should be a 13 digit number") @NotEmpty @NotNull @Size-- To valid the list of elements
