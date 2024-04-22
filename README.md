@@ -106,6 +106,31 @@ Spring Boot with JMS
 2) create a JMS producer and JMS consumer by implementing JMSListener interface 
 3) then do jmsProducer.sendMessage("Hello, World!");
 
+**JMS Interview Questions**
+
+  point to point messaging -- one sender and one receiver -- queue
+  publish-subscribe -- one sender multiple receivers. The receiver has to subscribe to the ropic to receive message -- topic
+
+  The creation of topic or queue is done by JMS provider administrator
+
+  Types of messages supported by JMS API
+  bytes messages, stream messages, text messages 
+
+  messages contain header, body and properties
+
+  **JMS Delivery Mode**
+
+  Persistent -- message loses in transit not affordable 
+  Non_Persistent -- ocassional message losses are ok
+
+  **JMS Acknowledge**
+  AUTO_ACKNOWLEDGE -- only the receiver receives the message it sends ack
+  CLIENT_ACKNOWLEDGE -- only the receiver processes the message it sends ack
+
+  durable subscriber retains messages until all the messages are acknowledged by the subscriber
+
+  JMS session object is a single threaded it can't be shared across multiple threads so not thread safe
+
 ***throughput -- number of messages kafka processes in a specific period of time 
 
 Create @Configuration class for each data source mentioned in application.properties 
