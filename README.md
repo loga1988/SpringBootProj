@@ -231,3 +231,10 @@ public class UserDatasourceConfiguration {
 PAAS -- Platform as a service PCF
 IAAS -- Infrastructure as a service AWS
 SAAS -- Software as a service Microsoft office
+
+ACID 
+
+Atomicity -- transaction takes place once and doesn't happen at all 
+Consistency --database consistent before and after transaction
+Isolation -- multiple transactions at the same time
+Durability -- changes of successful transaction occurs wven after system failure
