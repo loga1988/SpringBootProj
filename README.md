@@ -227,3 +227,7 @@ public class UserDatasourceConfiguration {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }
+
+PAAS -- Platform as a service PCF
+IAAS -- Infrastructure as a service AWS
+SAAS -- Software as a service Microsoft office
